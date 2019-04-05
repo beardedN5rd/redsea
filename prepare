@@ -2,13 +2,27 @@
 
 set -e
 
-if ! [ -x "/usr/bin/qemu-arm-static" ]
-then
-        sudo apt update
-        sudo apt install -y binfmt-support qemu qemu-user-static
-        sudo modprobe binfmt_misc
-fi
+function prepare_liquid_dsp
+{
+  pushd ./liquid-dsp/
+    git checkout backport_trusty_arm
+    ./prepare
+    ./build
+  popd
+}
 
-cp /usr/bin/qemu-arm-static .
+function get_arm_static
+{
+  if ! [ -x "/usr/bin/qemu-arm-static" ]
+  then
+          sudo apt update
+          sudo apt install -y binfmt-support qemu qemu-user-static
+          sudo modprobe binfmt_misc
+  fi
+  cp /usr/bin/qemu-arm-static .
+}
+
+get_arm_static
+prepare_liquid_dsp
 
 docker build -f Dockerfile -t redsea_builder:armhf_trusty .

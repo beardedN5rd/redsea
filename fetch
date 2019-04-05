@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+git submodule sync
+git submodule update --init --recursive
+pushd ./liquid-dsp/
+  git checkout backport_trusty_arm
+popd

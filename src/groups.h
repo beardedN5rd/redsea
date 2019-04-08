@@ -152,7 +152,7 @@ class Group {
 
  private:
   GroupType type_   {};
-  std::array<Block, 4> blocks_ {};
+  std::array<Block, 4> blocks_ {{}};
   std::chrono::time_point<std::chrono::system_clock> time_received_;
   uint8_t bler_     { 0 };
   bool has_type_    { false };

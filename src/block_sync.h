@@ -29,6 +29,11 @@ namespace redsea {
 struct SyncPulse {
   Offset offset { Offset::invalid };
   int bitcount  { -1 };
+  SyncPulse ()
+  {}
+  SyncPulse (Offset _offset, int _bitcount)
+  : offset(_offset), bitcount(_bitcount)
+  {}
 };
 
 class SyncPulseBuffer {

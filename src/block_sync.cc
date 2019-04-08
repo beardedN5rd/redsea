@@ -27,7 +27,7 @@ constexpr unsigned kBlockBitmask = (1 << kBlockLength) - 1;
 constexpr unsigned kCheckwordLength = 10;
 
 // Each offset word is associated with one block number
-constexpr eBlockNumber BlockNumberForOffset(Offset offset) {
+static const eBlockNumber BlockNumberForOffset(Offset offset) {
   switch (offset) {
     case Offset::A       : return BLOCK1; break;
     case Offset::B       : return BLOCK2; break;
@@ -42,7 +42,7 @@ constexpr eBlockNumber BlockNumberForOffset(Offset offset) {
 }
 
 // Return the next offset word in sequence
-constexpr Offset NextOffsetFor(Offset this_offset) {
+static const Offset NextOffsetFor(Offset this_offset) {
   switch (this_offset) {
     case Offset::A       : return Offset::B; break;
     case Offset::B       : return Offset::C; break;
@@ -56,7 +56,7 @@ constexpr Offset NextOffsetFor(Offset this_offset) {
 }
 
 // IEC 62106:2015 section B.3.1 Table B.1
-constexpr Offset OffsetForSyndrome(uint16_t syndrome) {
+static const Offset OffsetForSyndrome(uint16_t syndrome) {
   switch (syndrome) {
     case 0b1111011000 : return Offset::A;       break;
     case 0b1111010100 : return Offset::B;       break;
